@@ -6,7 +6,11 @@ import colors from "../../theme/color";
 
 const CourseBox = (props) => {
    return (
-      <TouchableOpacity activeOpacity={0.6} style={{ marginBottom: 30 }}>
+      <TouchableOpacity
+         activeOpacity={0.6}
+         style={{ marginBottom: 30 }}
+         onPress={props.onPress}
+      >
          <Image
             source={{
                uri: props.imageURI,
@@ -143,6 +147,16 @@ const coursesHomeScreen = (props) => {
                      rating={itemData.item.rating}
                      price={itemData.item.price}
                      bestseller={itemData.item.bestseller}
+                     onPress={() =>
+                        props.navigation.navigate("viewCourse", {
+                           imageURI: itemData.item.imageURI,
+                           title: itemData.item.title,
+                           author: itemData.item.author,
+                           rating: itemData.item.rating,
+                           price: itemData.item.price,
+                           bestseller: itemData.item.bestseller,
+                        })
+                     }
                   />
                );
             }}

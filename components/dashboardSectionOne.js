@@ -106,7 +106,7 @@ const UpExamContainer = (props) => {
                onPress={props.onPress}
                activeOpacity={0.6}
             >
-               <Text style={{ color: "white", fontSize: 14 }}>Edit</Text>
+               <Text style={{ color: "white", fontSize: 14 }}>View</Text>
             </TouchableOpacity>
          </View>
       </View>

@@ -39,6 +39,7 @@ const navigatorBox = (props) => {
                color: "white",
                fontWeight: "bold",
             }}
+            numberOfLines={1}
          >
             {props.title}
          </Text>

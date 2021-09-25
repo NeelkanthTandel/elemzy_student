@@ -36,12 +36,12 @@ const LoginScreen = (props) => {
          } else if (data.token != "") {
             console.log(data.token);
             AsyncStorage.setItem("token", data.token);
-            if (data.user.is_teacher) {
+            if (data.user.is_student) {
                return props.navigation.dispatch(
                   StackActions.replace("Drawer", {})
                );
             } else {
-               Alert.alert("Error", "This is not a teacher account");
+               Alert.alert("Error", "This is not a student account");
                return setLoading(false);
             }
          } else {

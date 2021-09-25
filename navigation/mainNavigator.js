@@ -21,17 +21,46 @@ import {
 
 import { AUTH_API_URL } from "../keys";
 import colors from "../theme/color";
+
 import dashboardScreen from "../screens/dashboardScreen";
+
 import LoginScreen from "../screens/loginScreen";
+
 import profileScreen from "../screens/profileScreen";
+
 import chatHomeScreen from "../screens/chat";
 import chatScreen from "../screens/chat/chatScreen";
+
 import supportScreen from "../screens/supportScreen";
+
 import calendarScreen from "../screens/calendarsScreen";
+
 import resultHomeScreen from "../screens/result";
 import viewResultScreen from "../screens/result/viewResultScreen";
 import studentResultScreen from "../screens/result/studentResultScreen";
+
 import coursesHomeScreen from "../screens/courses";
+import courseScreen from "../screens/courses/courseScreen";
+
+import notesScreen from "../screens/classes/notesScreen";
+import assignmentScreen from "../screens/classes/assignmentScreen";
+import documentScreen from "../screens/classes/documentScreen";
+import leaveRequestsScreen from "../screens/classes/leaveRequestsScreen";
+import classesScreen from "../screens/classes";
+import viewAssignmentScreen from "../screens/classes/viewAssignmentScreen";
+
+import attendanceHomeScreen from "../screens/Attendance";
+import viewAttendanceScreen from "../screens/Attendance/viewAttendance";
+
+import examHome from "../screens/Exam/index";
+import viewExamScreen from "../screens/Exam/viewExamScreen";
+
+import meetingHomeScreen from "../screens/Meeting";
+import viewMeetingScreen from "../screens/Meeting/viewMeetingScreen";
+
+import rankingHomeScreen from "../screens/Ranking";
+import uploadDocScreen from "../screens/Ranking/uploadDocScreen";
+import notificationSceen from "../screens/notificationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +83,33 @@ const coursesStack = () => {
          screenOptions={{ headerShown: false, animation: "slide_from_right" }}
       >
          <Stack.Screen name="home" component={coursesHomeScreen} />
+         <Stack.Screen name="viewCourse" component={courseScreen} />
+      </Stack.Navigator>
+   );
+};
+
+const classesStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      >
+         <Stack.Screen name="overview" component={classesScreen} />
+         <Stack.Screen name="notes" component={notesScreen} />
+         <Stack.Screen name="assignment" component={assignmentScreen} />
+         <Stack.Screen name="viewAssignment" component={viewAssignmentScreen} />
+         <Stack.Screen name="document" component={documentScreen} />
+         <Stack.Screen name="leaveRequest" component={leaveRequestsScreen} />
+      </Stack.Navigator>
+   );
+};
+
+const examStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      >
+         <Stack.Screen name="home" component={examHome} />
+         <Stack.Screen name="viewExam" component={viewExamScreen} />
       </Stack.Navigator>
    );
 };
@@ -66,6 +122,39 @@ const resultStack = () => {
          <Stack.Screen name="home" component={resultHomeScreen} />
          <Stack.Screen name="viewResult" component={viewResultScreen} />
          <Stack.Screen name="studentResult" component={studentResultScreen} />
+      </Stack.Navigator>
+   );
+};
+
+const rankingStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      >
+         <Stack.Screen name="home" component={rankingHomeScreen} />
+         <Stack.Screen name="uploadDoc" component={uploadDocScreen} />
+      </Stack.Navigator>
+   );
+};
+
+const meetingStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      >
+         <Stack.Screen name="home" component={meetingHomeScreen} />
+         <Stack.Screen name="viewMeeting" component={viewMeetingScreen} />
+      </Stack.Navigator>
+   );
+};
+
+const attendanceStack = () => {
+   return (
+      <Stack.Navigator
+         screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+      >
+         <Stack.Screen name="home" component={attendanceHomeScreen} />
+         <Stack.Screen name="viewAttendance" component={viewAttendanceScreen} />
       </Stack.Navigator>
    );
 };
@@ -132,16 +221,28 @@ const DrawerStack = (props) => {
                </TouchableOpacity>
             ),
             headerRight: () => (
-               <TouchableOpacity
-                  onPress={() => props.navigation.navigate("Profile")}
-               >
-                  <Ionicons
-                     name="ios-person-circle"
-                     size={30}
-                     color={colors.headerTitle}
-                     style={{ marginTop: 3, marginHorizontal: 15 }}
-                  />
-               </TouchableOpacity>
+               <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <TouchableOpacity
+                     onPress={() => props.navigation.navigate("Notification")}
+                  >
+                     <Ionicons
+                        name="notifications"
+                        size={28}
+                        color={colors.headerTitle}
+                        style={{ marginTop: 3, marginRight: 15 }}
+                     />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                     onPress={() => props.navigation.navigate("Profile")}
+                  >
+                     <Ionicons
+                        name="ios-person-circle"
+                        size={30}
+                        color={colors.headerTitle}
+                        style={{ marginTop: 3, marginRight: 15 }}
+                     />
+                  </TouchableOpacity>
+               </View>
             ),
          }}
          drawerContent={(props) => {
@@ -182,7 +283,7 @@ const DrawerStack = (props) => {
             name="Dashboard"
             component={dashboardScreen}
             options={{
-               drawerLabel: "Home",
+               drawerLabel: "Dashboard",
                title: "",
                drawerIcon: () => (
                   <MaterialIcons
@@ -202,6 +303,36 @@ const DrawerStack = (props) => {
                drawerIcon: () => (
                   <MaterialIcons
                      name="library-books"
+                     size={23}
+                     color={colors.headerTitle}
+                  />
+               ),
+            }}
+         />
+         <Drawer.Screen
+            name="Classes"
+            component={classesStack}
+            options={{
+               drawerLabel: "Classes",
+               title: "",
+               drawerIcon: () => (
+                  <Entypo
+                     name="blackboard"
+                     size={23}
+                     color={colors.headerTitle}
+                  />
+               ),
+            }}
+         />
+         <Drawer.Screen
+            name="Exams"
+            component={examStack}
+            options={{
+               drawerLabel: "Exams",
+               title: "",
+               drawerIcon: () => (
+                  <MaterialCommunityIcons
+                     name="clipboard-list"
                      size={23}
                      color={colors.headerTitle}
                   />
@@ -234,6 +365,49 @@ const DrawerStack = (props) => {
                   <FontAwesome
                      name="graduation-cap"
                      size={18}
+                     color={colors.headerTitle}
+                  />
+               ),
+            }}
+         />
+         <Drawer.Screen
+            name="Ranking"
+            component={rankingStack}
+            options={{
+               drawerLabel: "Ranking",
+               title: "",
+               drawerIcon: () => (
+                  <Entypo
+                     name="bar-graph"
+                     size={23}
+                     color={colors.headerTitle}
+                  />
+               ),
+            }}
+         />
+         <Drawer.Screen
+            name="Meeting"
+            component={meetingStack}
+            options={{
+               drawerIcon: () => (
+                  <FontAwesome
+                     name="group"
+                     size={22}
+                     color={colors.headerTitle}
+                  />
+               ),
+            }}
+         />
+         <Drawer.Screen
+            name="Attendance"
+            component={attendanceStack}
+            options={{
+               drawerLabel: "Attendance",
+               title: "",
+               drawerIcon: () => (
+                  <Octicons
+                     name="checklist"
+                     size={25}
                      color={colors.headerTitle}
                   />
                ),
@@ -369,6 +543,10 @@ export default function MainNavigator(Props) {
                               name="Profile"
                               component={profileScreen}
                            />
+                           <Stack.Screen
+                              name="Notification"
+                              component={notificationSceen}
+                           />
                         </>
                      ) : (
                         <>
@@ -388,6 +566,10 @@ export default function MainNavigator(Props) {
                            <Stack.Screen
                               name="Profile"
                               component={profileScreen}
+                           />
+                           <Stack.Screen
+                              name="Notification"
+                              component={notificationSceen}
                            />
                         </>
                      )}
